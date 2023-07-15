@@ -1,4 +1,6 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Nginx-Nextjs-Test
+
+This is a test project to investigate using Nginx as reverse proxy to achieve a setup with Next.js which supports multiple basePaths.
 
 ## Getting Started
 
@@ -12,23 +14,25 @@ yarn dev
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Running with proxy
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To achieve multiple `basePath` while still using a single Next.js application there is a nginx reverse proxy included.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+There are two ways of starting the application in development mode;
+1. Start the Next.js app with `npm run dev` and start the local-proxy `docker compose up local-proxy`. This is done automatically with the command `make dev-local`
+2. Start the Next.js app within a docker container with the `/src` folder mounted. This is done automatically with the command `make dev`
 
-## Learn More
+In both cases hot-reloading works as expected. And it is a matter of taste which approach to use.
 
-To learn more about Next.js, take a look at the following resources:
+To build the application and test it in "production mode", run `make start`. This will first build your application, before starting it and the proxy.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+**Summary:**
+```
+make dev       # Next.js app is running on host-system
+make dev-local # Next.js app is running within a container
+make start     # Build and create docker images, and starts them
+make stop      # Stops all containers within this project
+```
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
