@@ -10,7 +10,10 @@
     "intl": "i18n-tool build src/intl/messages src/intl/compiled --strict --ast --lut --typescript"
   },
   "dependencies": {
+    "@code-obos/analytics": "^0.1.1",
+    "@code-obos/obos-layout": "^0.2.0",
     "@formatjs/intl": "^2.9.0",
+    "@obosbbl/grunnmuren-tailwind": "^0.9.1",
     "@types/node": "20.4.2",
     "@types/react": "18.2.15",
     "@types/react-dom": "18.2.7",
@@ -23,6 +26,9 @@
     "typescript": "5.1.6"
   },
   "devDependencies": {
-    "@nutgaard/i18n-tools": "^1.2.3"
+    "@nutgaard/i18n-tools": "^1.2.3",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.27",
+    "tailwindcss": "^3.3.3"
   }
 }
