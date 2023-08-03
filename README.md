@@ -35,4 +35,21 @@ make start     # Build and create docker images, and starts them
 make stop      # Stops all containers within this project
 ```
 
+## Hacks
+
+In order to make the decorator work we need to monkey-patch how it resolves the current pathname.
+This is because the current pathname is matched against the structure in EPIServer, and does not match when the app is using `boligjakt-frontend` as its basepath.
+
+In `@code-obos/obos-layout /src/components/paths.ts` replace the function with the following; 
+
+```typescript
+export function usePathnameWithBasePath() {
+    const pathname = usePathname();
+    const pathnameWithBasePath = useMemo(() => basePath + pathname, [pathname]);
+
+    return pathnameWithBasePath
+        .replace('/boligjakt-frontend/nb/', '/')
+        .replace('/boligjakt-frontend/sv/', '/');
+}
+```
 
